@@ -1,73 +1,51 @@
-/* BELOW  CODE IS BEFORE REFACTORING */
-
-/* const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamental of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
-
-  return(
-    <div>
-      <h1>{course}</h1>
-      <p>
-        {part1} {exercises1}
-      </p>
-      <p>
-        {part2} {exercises2}
-      </p>
-      <p>
-        {part3} {exercises3}
-      </p>
-
-      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
-    </div>
-  )
-}
-export default App */
-
-
-/* AFTER REFACTORING */
 const Header = (prop) => {
-   const course = 'Half Stack application development'
    return<>
-     <h1>{course}</h1>
+     <h1>{prop.course}</h1>
    </>
 }
 
 const Content = (prop) => {
-  const content = [
-    {part1:  'Fundamental of React',exercises1: 10},
-    {part2: 'Using props to pass data', exercises2: 7},
-    {part3: 'State of a componenet', exercises3: 14}
-  ]
+  console.log(prop)
   return <>
-    <p>{content[0].part1} {content[0].exercises1}</p>
-    <p>{content[1].part2} {content[1].exercises2}</p>
-    <p>{content[2].part3} {content[2].exercises3}</p>
+   <p>{prop.parts[0].name}: {prop.parts[0].exercises}</p>
+   <p>{prop.parts[1].name}: {prop.parts[1].exercises}</p>
+   <p>{prop.parts[2].name}: {prop.parts[2].exercises}</p>
   </>
 }
 
 const Total = (prop) => {
  return<>
-   <p>Numbers of exercises {prop.sumOfExercise}</p>
+   <p>Number of exercises: {prop.sumOfExercise}</p>
  </>
 
 }
 
 const App = () => {
-  const exercises1 = 10
-  const exercises2 = 7
-  const exercises3 = 14
-  const sumOfExercise = exercises1 + exercises2 + exercises3
-  
+
+  const course = 'Half Stack application development'
+
+  const parts = [{
+    name: 'Fundamental of React',
+    exercises: 10
+  },
+
+  {
+    name: 'Using props to pass data',
+    exercises: 7
+  },
+
+   {
+    name: 'State of a component',
+    exercises: 14
+  }
+]
+
+  const sumOfExercise = parts[0].exercises + parts[1].exercises +  parts[2].exercises
   return(
      <div>
-      <Header  course/> 
-      <Content />
-      <Total  sumOfExercise={sumOfExercise}/>
+       < Header course={course}/>
+       <Content parts={parts}/>
+       <Total sumOfExercise={sumOfExercise}/>
      </div>
   )
 }
